@@ -32,7 +32,7 @@ export default function Page() {
           <TabsList>
             <TabsTrigger value="compare">Compare</TabsTrigger>
             <TabsTrigger value="results" disabled>
-              Results
+              Coming Soon...
             </TabsTrigger>
           </TabsList>
 
@@ -53,9 +53,7 @@ export default function Page() {
 
           <TabsContent value="results" className="space-y-4">
             <div className="flex flex-col h-screen">
-              {/* Wrap the cards in a div with flex display */}
               <div className="flex w-full">
-                {/* Adjust the classes on Card components for flex-basis or width */}
                 <Card className="flex flex-[1_1_40%]">
                   <CardHeader>
                     <CardTitle>Plan Your Trip</CardTitle>
@@ -65,7 +63,6 @@ export default function Page() {
                   </CardContent>
                 </Card>
                 <Separator className="mx-4" orientation="vertical" />{" "}
-                {/* Optional separator for visual distinction */}
                 <Card className="flex flex-[3_1_60%]">
                   <CardHeader>
                     <CardTitle>Route Map</CardTitle>

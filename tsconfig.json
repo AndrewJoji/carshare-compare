@@ -28,6 +28,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/api/comparision"
-, ".next/types/app/(dashboard)/dashboard/Page.tsx"  ],
+, ".next/types/app/(dashboard)/dashboard/page.tsx"  ],
   "exclude": ["node_modules"]
 }

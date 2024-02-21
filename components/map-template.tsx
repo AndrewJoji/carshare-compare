@@ -25,7 +25,7 @@ export default function MapWithMarkers({
 }) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_PLACES_SECRET || "",
-    libraries: ["places"] as const,
+    libraries: ["places"],
   });
 
   if (loadError) return <div>Map cannot be loaded right now, sorry.</div>;
