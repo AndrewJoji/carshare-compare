@@ -18,8 +18,14 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
 
   const [isEndEvoTripChecked, setIsEndEvoTripChecked] = useState(false);
 
-  const handleCheckboxChange = (checked: boolean) => {
+  const handleEndEvoTripCheckboxChange = (checked: boolean) => {
     setIsEndEvoTripChecked(checked);
+  };
+
+  const [isEVModoChecked, setIsEVModoChecked] = useState(false);
+
+  const handleEVModoCheckboxChange = (checked: boolean) => {
+    setIsEVModoChecked(checked);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -51,7 +57,7 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
           <Checkbox
             id="endEvo"
             checked={isEndEvoTripChecked}
-            onCheckedChange={handleCheckboxChange}
+            onCheckedChange={handleEndEvoTripCheckboxChange}
             className='ml-1' />
           <TooltipProvider>
             <Tooltip>
@@ -66,7 +72,29 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
                   End Evo trip at destination</Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Check box if you want to end your Evo trip at the Destination (will assume new trip for return)</p>
+                <p>This will assume that you will end the Evo Trip at your Desitiantion</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <Checkbox
+            id="evModo"
+            checked={isEVModoChecked}
+            onCheckedChange={handleEVModoCheckboxChange}
+            className='ml-1' />
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsEVModoChecked(!isEVModoChecked);
+                  }}
+                >
+                  Modo EV</Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Modo does not apply a Fuel Surchangre for EVs</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>

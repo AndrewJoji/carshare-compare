@@ -3,8 +3,8 @@ import Sidebar from "@/components/layout/sidebar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Next Shadcn Dashboard Starter",
-  description: "Basic dashboard with Next.js and Shadcn",
+  title: "Car Share Compare",
+  description: "Trip Planner for Car Sharing in Vancouver",
 };
 
 export default function DashboardLayout({
