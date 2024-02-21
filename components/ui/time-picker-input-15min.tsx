@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
@@ -8,7 +8,8 @@ import {
   setDateByType,
 } from "./time-picker-utils";
 
-export interface TimePickerInput15MinProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TimePickerInput15MinProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   picker: TimePickerType;
   date: Date | undefined;
   setDate: (date: Date | undefined) => void;
@@ -16,21 +17,30 @@ export interface TimePickerInput15MinProps extends React.InputHTMLAttributes<HTM
   onLeftFocus?: () => void;
 }
 
-const TimePickerInput15Min = React.forwardRef<HTMLInputElement, TimePickerInput15MinProps>(
-  ({
-    className,
-    type = "tel",
-    value,
-    id,
-    name,
-    date = new Date(new Date().setHours(0,0,0,0)),
-    setDate,
-    picker,
-    onLeftFocus,
-    onRightFocus,
-    ...props
-  }, ref) => {
-    const calculatedValue = React.useMemo(() => getDateByType(date, picker), [date, picker]);
+const TimePickerInput15Min = React.forwardRef<
+  HTMLInputElement,
+  TimePickerInput15MinProps
+>(
+  (
+    {
+      className,
+      type = "tel",
+      value,
+      id,
+      name,
+      date = new Date(new Date().setHours(0, 0, 0, 0)),
+      setDate,
+      picker,
+      onLeftFocus,
+      onRightFocus,
+      ...props
+    },
+    ref,
+  ) => {
+    const calculatedValue = React.useMemo(
+      () => getDateByType(date, picker),
+      [date, picker],
+    );
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Tab") return;
@@ -43,8 +53,13 @@ const TimePickerInput15Min = React.forwardRef<HTMLInputElement, TimePickerInput1
         let newValue = getArrowByType(calculatedValue, step, picker);
         // Ensure minutes adjust in 15-minute increments
         if (picker === "minutes") {
-          newValue = ((Math.round(parseInt(calculatedValue) / 15) + (step > 0 ? 1 : -1)) * 15 % 60).toString();
-          newValue = newValue.toString().padStart(2, '0'); // Pad single digits for consistency
+          newValue = (
+            ((Math.round(parseInt(calculatedValue) / 15) +
+              (step > 0 ? 1 : -1)) *
+              15) %
+            60
+          ).toString();
+          newValue = newValue.toString().padStart(2, "0"); // Pad single digits for consistency
         }
         const tempDate = new Date(date);
         setDate(setDateByType(tempDate, newValue, picker));
@@ -58,7 +73,7 @@ const TimePickerInput15Min = React.forwardRef<HTMLInputElement, TimePickerInput1
         name={name || picker}
         className={cn(
           "w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
-          className
+          className,
         )}
         value={value || calculatedValue}
         type={type}
@@ -67,7 +82,7 @@ const TimePickerInput15Min = React.forwardRef<HTMLInputElement, TimePickerInput1
         {...props}
       />
     );
-  }
+  },
 );
 
 TimePickerInput15Min.displayName = "TimePickerInput15Min";

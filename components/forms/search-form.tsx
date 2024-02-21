@@ -1,12 +1,17 @@
-import React, { FC, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import GooglePlacesAutocomplete from '../google-places-autocomplete';
+import React, { FC, useState } from "react";
+import { Button } from "@/components/ui/button";
+import GooglePlacesAutocomplete from "../google-places-autocomplete";
 import { MapLocation } from "@/types";
-import { Label } from '../ui/label';
-import { DateTimePicker } from '../ui/date-time-picker';
-import { DateTimePicker15Min } from '../ui/date-time-picker-15min';
-import { Checkbox } from '../ui/checkbox';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+import { Label } from "../ui/label";
+import { DateTimePicker } from "../ui/date-time-picker";
+import { DateTimePicker15Min } from "../ui/date-time-picker-15min";
+import { Checkbox } from "../ui/checkbox";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 interface SearchFormProps {
   onSearch: (locations: MapLocation[]) => void;
@@ -39,10 +44,10 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
     }
 
     try {
-      const response = await fetch('/api/compareCost', {
-        method: 'POST',
+      const response = await fetch("/api/compareCost", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           startLocation,
@@ -60,23 +65,23 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
       const data = await response.json();
       console.log(data.message); // Or handle the response as needed
     } catch (error) {
-      console.error('Failed to calculate cost:', error);
+      console.error("Failed to calculate cost:", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Label className='mb-2'>Start Location</Label>
+      <Label className="mb-2">Start Location</Label>
       <GooglePlacesAutocomplete onSelect={setStartLocation} />
-      <Label className='mb-2'>Destination</Label>
+      <Label className="mb-2">Destination</Label>
       <GooglePlacesAutocomplete onSelect={setEndLocation} />
-      <Label className='mb-2'>Start Date/ Time</Label>
+      <Label className="mb-2">Start Date/ Time</Label>
       <div>
-        <DateTimePicker15Min ></DateTimePicker15Min>
+        <DateTimePicker15Min></DateTimePicker15Min>
       </div>
-      <Label className='mt-2 mb-2'>End Date/ Time </Label>
+      <Label className="mt-2 mb-2">End Date/ Time </Label>
       <div>
-        <DateTimePicker15Min ></DateTimePicker15Min>
+        <DateTimePicker15Min></DateTimePicker15Min>
       </div>
       <div>
         <div className="flex items-center space-x-2 mt-2">
@@ -84,7 +89,8 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
             id="endEvo"
             checked={isEndEvoTripChecked}
             onCheckedChange={handleEndEvoTripCheckboxChange}
-            className='ml-1' />
+            className="ml-1"
+          />
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -95,10 +101,14 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
                     setIsEndEvoTripChecked(!isEndEvoTripChecked);
                   }}
                 >
-                  End Evo trip at destination</Button>
+                  End Evo trip at destination
+                </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>This will assume that you will end the Evo Trip at your Desitiantion</p>
+                <p>
+                  This will assume that you will end the Evo Trip at your
+                  Desitiantion
+                </p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -106,7 +116,8 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
             id="evModo"
             checked={isEVModoChecked}
             onCheckedChange={handleEVModoCheckboxChange}
-            className='ml-1' />
+            className="ml-1"
+          />
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -117,7 +128,8 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
                     setIsEVModoChecked(!isEVModoChecked);
                   }}
                 >
-                  Modo EV</Button>
+                  Modo EV
+                </Button>
               </TooltipTrigger>
               <TooltipContent>
                 <p>Modo does not apply a Fuel Surchangre for EVs</p>
@@ -127,7 +139,9 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
         </div>
       </div>
       <div>
-        <Button type="submit" className='mt-2'>Calculate Cost</Button>
+        <Button type="submit" className="mt-2">
+          Calculate Cost
+        </Button>
       </div>
     </form>
   );

@@ -1,23 +1,19 @@
-'use client';
-import { CalendarDateRangePicker } from "@/components/date-range-picker";
+"use client";
 import SearchForm from "@/components/forms/search-form";
 import MapWithMarkers from "@/components/map-template";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { MapLocation } from "@/types";
 import { Separator } from "@/components/ui/separator";
 
-export default function page() {
-
+export default function Page() {
   const [locations, setLocations] = useState<MapLocation[]>([]);
 
   const handleSearch = (newLocations: MapLocation[]) => {
@@ -31,18 +27,16 @@ export default function page() {
           <h2 className="text-3xl font-bold tracking-tight">
             Car Share Compare
           </h2>
-
-
-
         </div>
         <Tabs defaultValue="compare" className="space-y-4">
           <TabsList>
             <TabsTrigger value="compare">Compare</TabsTrigger>
-            <TabsTrigger value="results" disabled>Results</TabsTrigger>
+            <TabsTrigger value="results" disabled>
+              Results
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="compare" className="space-y-4">
-
             <div className="flex flex-col h-screen">
               <Card className="col-span-4">
                 <CardHeader>
@@ -70,9 +64,8 @@ export default function page() {
                     <SearchForm onSearch={handleSearch} />
                   </CardContent>
                 </Card>
-
-                <Separator className="mx-4" orientation="vertical" /> {/* Optional separator for visual distinction */}
-
+                <Separator className="mx-4" orientation="vertical" />{" "}
+                {/* Optional separator for visual distinction */}
                 <Card className="flex flex-[3_1_60%]">
                   <CardHeader>
                     <CardTitle>Route Map</CardTitle>
@@ -84,7 +77,6 @@ export default function page() {
               </div>
             </div>
           </TabsContent>
-
         </Tabs>
       </div>
     </ScrollArea>

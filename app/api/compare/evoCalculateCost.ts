@@ -1,8 +1,15 @@
-import {GST_RATE, PST_RATE, EVO_HOUR_RATE, EVO_DAY_RATE, EVO_MINUTE_RATE, EVO_BASE} from './constants';
+import {
+  GST_RATE,
+  PST_RATE,
+  EVO_HOUR_RATE,
+  EVO_DAY_RATE,
+  EVO_MINUTE_RATE,
+  EVO_BASE,
+} from "./constants";
 
-
-export function calculate_evo_cost(duration_minutes: number): Record<string, number> {
-
+export function calculate_evo_cost(
+  duration_minutes: number,
+): Record<string, number> {
   let time_charge: number;
   if (duration_minutes <= 36) {
     time_charge = duration_minutes * EVO_MINUTE_RATE;
@@ -22,7 +29,10 @@ export function calculate_evo_cost(duration_minutes: number): Record<string, num
       hours = Math.floor(remaining_minutes_after_days / 60);
       let minutes = remaining_minutes_after_days % 60;
       if (minutes <= 36) {
-        time_charge = days * EVO_DAY_RATE + hours * EVO_HOUR_RATE + minutes * EVO_MINUTE_RATE;
+        time_charge =
+          days * EVO_DAY_RATE +
+          hours * EVO_HOUR_RATE +
+          minutes * EVO_MINUTE_RATE;
       } else {
         hours += 1;
         time_charge = days * EVO_DAY_RATE + hours * EVO_HOUR_RATE;

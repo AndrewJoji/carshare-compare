@@ -32,8 +32,8 @@ export type MainNavItem = NavItemWithOptionalChildren;
 export type SidebarNavItem = NavItemWithChildren;
 
 export interface MapLocation {
-    id: string;
-    lat: number;
-    lng: number;
-    name: string;
-  }
+  id: string;
+  lat: number;
+  lng: number;
+  name: string;
+}

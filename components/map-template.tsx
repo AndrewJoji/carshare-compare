@@ -1,11 +1,11 @@
-import React from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import React from "react";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { MapLocation } from "@/types";
 
 const mapContainerStyle = {
-  width: '100%',
-  height: '400px',
-  marginTop: '20px',
+  width: "100%",
+  height: "400px",
+  marginTop: "20px",
 };
 
 const center = {
@@ -18,10 +18,13 @@ const options = {
   zoomControl: true,
 };
 
-
-export default function MapWithMarkers({ locations }: { locations: MapLocation[] }) {
+export default function MapWithMarkers({
+  locations,
+}: {
+  locations: MapLocation[];
+}) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.GOOGLE_PLACES_SECRET || "", 
+    googleMapsApiKey: process.env.GOOGLE_PLACES_SECRET || "",
     libraries: ["places"] as const,
   });
 
@@ -35,9 +38,9 @@ export default function MapWithMarkers({ locations }: { locations: MapLocation[]
       zoom={10}
       options={options}
     >
-      {locations.map(location => (
+      {locations.map((location) => (
         <Marker
-          key={location.id} 
+          key={location.id}
           position={{ lat: location.lat, lng: location.lng }}
         />
       ))}
