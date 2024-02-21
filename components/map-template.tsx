@@ -24,7 +24,7 @@ export default function MapWithMarkers({
   locations: MapLocation[];
 }) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.GOOGLE_PLACES_SECRET || "",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_PLACES_SECRET || "",
     libraries: ["places"],
   });
 
