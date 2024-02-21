@@ -24,6 +24,12 @@ export default function Page() {
         <Tabs defaultValue="compare" className="space-y-4">
           <TabsList>
             <TabsTrigger value="compare">Compare</TabsTrigger>
+            <TabsTrigger value="evo" disabled>
+              Evo
+            </TabsTrigger>
+            <TabsTrigger value="modo" disabled>
+              Modo
+            </TabsTrigger>
             <TabsTrigger value="results" disabled>
               Coming Soon...
             </TabsTrigger>

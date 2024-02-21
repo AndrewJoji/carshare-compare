@@ -26,26 +26,25 @@ export default function AuthenticationPage() {
         <div className="relative z-20 flex items-center text-lg font-medium">
           <svg
             xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="mr-2 h-6 w-6"
+            className="lucide lucide-route"
           >
-            <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
+            <circle cx="6" cy="19" r="3" />
+            <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
+            <circle cx="18" cy="5" r="3" />
           </svg>
-          Logo
+          Car Share Compare
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            <p className="text-lg">
-              &ldquo;This library has saved me countless hours of work and
-              helped me deliver stunning designs to my clients faster than ever
-              before.&rdquo;
-            </p>
-            <footer className="text-sm">Sofia Davis</footer>
+            <p className="text-lg">Go Places Your Way</p>
           </blockquote>
         </div>
       </div>
@@ -60,7 +59,7 @@ export default function AuthenticationPage() {
             </p>
           </div>
           <UserAuthForm />
-          <p className="px-8 text-center text-sm text-muted-foreground">
+          {/* <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking continue, you agree to our{" "}
             <Link
               href="/terms"
@@ -74,9 +73,8 @@ export default function AuthenticationPage() {
               className="underline underline-offset-4 hover:text-primary"
             >
               Privacy Policy
-            </Link>
-            .
-          </p>
+            </Link> */}
+          .{/* </p> */}
         </div>
       </div>
     </div>

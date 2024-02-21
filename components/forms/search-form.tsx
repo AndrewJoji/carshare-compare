@@ -12,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 interface SearchFormProps {
   onSearch: (locations: MapLocation[]) => void;
@@ -83,60 +84,87 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
       <div>
         <DateTimePicker15Min></DateTimePicker15Min>
       </div>
-      <div>
-        <div className="flex items-center space-x-2 mt-2">
-          <Checkbox
-            id="endEvo"
-            checked={isEndEvoTripChecked}
-            onCheckedChange={handleEndEvoTripCheckboxChange}
-            className="ml-1"
-          />
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsEndEvoTripChecked(!isEndEvoTripChecked);
-                  }}
-                >
-                  End Evo trip at destination
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>
-                  This will assume that you will end the Evo Trip at your
-                  Desitiantion
-                </p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <Checkbox
-            id="evModo"
-            checked={isEVModoChecked}
-            onCheckedChange={handleEVModoCheckboxChange}
-            className="ml-1"
-          />
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setIsEVModoChecked(!isEVModoChecked);
-                  }}
-                >
-                  Modo EV
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Modo does not apply a Fuel Surchangre for EVs</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
+
+      <Label className="mt-4 mb-2">Your Modo Plan </Label>
+      <div className="flex items-center space-x-2 mt-2 ml-1 mb-2">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <RadioGroup defaultValue="modo_plus">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="modo_plus" id="r1" />
+                  <Label htmlFor="r1">Modo Plus</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="modo_monthly" id="r2" />
+                  <Label htmlFor="r2">Modo Monthly</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="modo_business" id="r3" />
+                  <Label htmlFor="r3">Modo Business</Label>
+                </div>
+              </RadioGroup>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Pick your Modo Pricing Plan</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <div />
+      </div>
+      <Label className="mt-1">Optional Paramaters</Label>
+      <div className="flex items-center space-x-2">
+        <Checkbox
+          id="endEvo"
+          checked={isEndEvoTripChecked}
+          onCheckedChange={handleEndEvoTripCheckboxChange}
+          className="ml-1"
+        />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsEndEvoTripChecked(!isEndEvoTripChecked);
+                }}
+              >
+                End Evo trip at destination
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                This will assume that you will end the Evo Trip at your
+                Desitiantion
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <Checkbox
+          id="evModo"
+          checked={isEVModoChecked}
+          onCheckedChange={handleEVModoCheckboxChange}
+          className="ml-1"
+        />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsEVModoChecked(!isEVModoChecked);
+                }}
+              >
+                Modo EV
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Modo does not apply a Fuel Surchangre for EVs</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
       <div>
         <Button type="submit" className="mt-2">
