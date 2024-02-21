@@ -89,3 +89,11 @@
 .input-spacing {
   margin-bottom: 10px;
 }
+
+.form-card {
+  flex: 1; /* Takes up only the space it needs */
+}
+
+.map-card {
+  flex: 3; /* Takes up three times the space that form does */
+}

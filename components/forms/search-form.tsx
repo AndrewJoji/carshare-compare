@@ -16,6 +16,9 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
   const [startLocation, setStartLocation] = useState<MapLocation | null>(null);
   const [endLocation, setEndLocation] = useState<MapLocation | null>(null);
 
+  const [startDateTime, setStartDateTime] = useState<Date | null>(null);
+  const [endDateTime, setEndDateTime] = useState<Date | null>(null);
+
   const [isEndEvoTripChecked, setIsEndEvoTripChecked] = useState(false);
 
   const handleEndEvoTripCheckboxChange = (checked: boolean) => {
@@ -34,8 +37,31 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
       console.error("Start and end locations are required");
       return;
     }
-    // Assuming onSearch expects an array of MapLocation objects
-    onSearch([startLocation, endLocation].filter(location => location) as MapLocation[]);
+
+    try {
+      const response = await fetch('/api/compareCost', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          startLocation,
+          endLocation,
+          isEndEvoTripChecked,
+          isEVModoChecked,
+          // Add any other form fields here
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log(data.message); // Or handle the response as needed
+    } catch (error) {
+      console.error('Failed to calculate cost:', error);
+    }
   };
 
   return (
@@ -46,11 +72,11 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
       <GooglePlacesAutocomplete onSelect={setEndLocation} />
       <Label className='mb-2'>Start Date/ Time</Label>
       <div>
-        <DateTimePicker15Min></DateTimePicker15Min>
+        <DateTimePicker15Min ></DateTimePicker15Min>
       </div>
       <Label className='mt-2 mb-2'>End Date/ Time </Label>
       <div>
-        <DateTimePicker15Min></DateTimePicker15Min>
+        <DateTimePicker15Min ></DateTimePicker15Min>
       </div>
       <div>
         <div className="flex items-center space-x-2 mt-2">

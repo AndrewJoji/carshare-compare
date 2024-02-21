@@ -21,8 +21,8 @@ const options = {
 
 export default function MapWithMarkers({ locations }: { locations: MapLocation[] }) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.GOOGLE_PLACES_SECRET || "AIzaSyAivDvY5EXQwsVQRGlr_ZgHj0ug2M59_vQ", // Safely handle potentially undefined API key
-    libraries: ["places"] as const, // Correct type for libraries
+    googleMapsApiKey: process.env.GOOGLE_PLACES_SECRET || "", 
+    libraries: ["places"] as const,
   });
 
   if (loadError) return <div>Map cannot be loaded right now, sorry.</div>;

@@ -12,7 +12,7 @@ interface GooglePlacesAutocompleteProps {
 
 const GooglePlacesAutocomplete: React.FC<GooglePlacesAutocompleteProps> = ({ onSelect }) => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.GOOGLE_PLACES_SECRET || "AIzaSyAivDvY5EXQwsVQRGlr_ZgHj0ug2M59_vQ", // Use an environment variable for the API key
+    googleMapsApiKey: process.env.GOOGLE_PLACES_SECRET || "", 
     libraries,
   });
   const autoCompleteRef = useRef<HTMLInputElement | null>(null);
