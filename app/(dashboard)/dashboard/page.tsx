@@ -1,12 +1,7 @@
 "use client";
 import SearchForm from "@/components/forms/search-form";
 import MapWithMarkers from "@/components/map-template";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
@@ -24,9 +19,7 @@ export default function Page() {
     <ScrollArea className="flex flex-col h-screen">
       <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
         <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">
-            Car Share Compare
-          </h2>
+          <h2 className="text-3xl font-bold tracking-tight">Plan Your Trip</h2>
         </div>
         <Tabs defaultValue="compare" className="space-y-4">
           <TabsList>
@@ -40,7 +33,7 @@ export default function Page() {
             <div className="flex flex-col h-screen">
               <Card className="col-span-4">
                 <CardHeader>
-                  <CardTitle>Plan Your Trip</CardTitle>
+                  <CardTitle>Trip Details</CardTitle>
                 </CardHeader>
                 <CardContent className="pl-2">
                   <SearchForm onSearch={handleSearch} />
