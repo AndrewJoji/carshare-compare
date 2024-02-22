@@ -1,3 +1,4 @@
+import { calculateDuration } from "./compareCost";
 import {
   GST_RATE,
   PST_RATE,
@@ -6,11 +7,12 @@ import {
   EVO_MINUTE_RATE,
   EVO_BASE,
 } from "./constants";
+import { Trip } from "./trip";
 
-export function calculate_evo_cost(
-  duration_minutes: number,
-): Record<string, number> {
+export function calculate_evo_cost(trip: Trip): Record<string, number> {
   let time_charge: number;
+  let duration_minutes = calculateDuration(trip);
+
   if (duration_minutes <= 36) {
     time_charge = duration_minutes * EVO_MINUTE_RATE;
   } else if (duration_minutes <= 60) {

@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import GooglePlacesAutocomplete from "../google-places-autocomplete";
 import { MapLocation } from "@/types";
 import { Label } from "../ui/label";
-import { DateTimePicker } from "../ui/date-time-picker";
 import { DateTimePicker15Min } from "../ui/date-time-picker-15min";
 import { Checkbox } from "../ui/checkbox";
 import {
@@ -22,8 +21,10 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
   const [startLocation, setStartLocation] = useState<MapLocation | null>(null);
   const [endLocation, setEndLocation] = useState<MapLocation | null>(null);
 
-  const [startDateTime, setStartDateTime] = useState<Date | null>(null);
-  const [endDateTime, setEndDateTime] = useState<Date | null>(null);
+  const [startDateTime, setStartDateTime] = useState<Date | undefined>(
+    undefined,
+  );
+  const [endDateTime, setEndDateTime] = useState<Date | undefined>(undefined);
 
   const [isEndEvoTripChecked, setIsEndEvoTripChecked] = useState(false);
 
@@ -37,13 +38,28 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
     setIsEVModoChecked(checked);
   };
 
+  const [startLocationError, setStartLocationError] = useState("");
+  const [endLocationError, setEndLocationError] = useState("");
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!startLocation || !endLocation) {
-      console.error("Start and end locations are required");
-      return;
+    // Reset validation messages
+    setStartLocationError("");
+    setEndLocationError("");
+
+    // Validate startLocation and endLocation
+    let isValid = true;
+    if (!startLocation) {
+      setStartLocationError("Start location is required.");
+      isValid = false;
+    }
+    if (!endLocation) {
+      setEndLocationError("End location is required.");
+      isValid = false;
     }
 
+    // If validation fails, stop the form submission
+    if (!isValid) return;
     try {
       const response = await fetch("/api/compareCost", {
         method: "POST",
@@ -53,6 +69,8 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
         body: JSON.stringify({
           startLocation,
           endLocation,
+          startDateTime: startDateTime?.toISOString(), // Convert Date to ISO string
+          endDateTime: endDateTime?.toISOString(),
           isEndEvoTripChecked,
           isEVModoChecked,
           // Add any other form fields here
@@ -78,11 +96,17 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
       <GooglePlacesAutocomplete onSelect={setEndLocation} />
       <Label className="mb-2">Start Date/ Time</Label>
       <div>
-        <DateTimePicker15Min></DateTimePicker15Min>
+        <DateTimePicker15Min
+          date={startDateTime}
+          setDate={setStartDateTime}
+        ></DateTimePicker15Min>
       </div>
       <Label className="mt-2 mb-2">End Date/ Time </Label>
       <div>
-        <DateTimePicker15Min></DateTimePicker15Min>
+        <DateTimePicker15Min
+          date={endDateTime}
+          setDate={setEndDateTime}
+        ></DateTimePicker15Min>
       </div>
 
       <Label className="mt-4 mb-2">Your Modo Plan </Label>

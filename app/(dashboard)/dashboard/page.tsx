@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { MapLocation } from "@/types";
 import { Separator } from "@/components/ui/separator";
+import { ResultsTable } from "@/components/tables/results-tables/results-table";
 
 export default function Page() {
   const [locations, setLocations] = useState<MapLocation[]>([]);
@@ -35,18 +36,38 @@ export default function Page() {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="compare" className="space-y-4">
-            <div className="flex flex-col h-screen">
-              <Card className="col-span-4">
-                <CardHeader>
-                  <CardTitle>Trip Details</CardTitle>
-                </CardHeader>
-                <CardContent className="pl-2">
-                  <SearchForm onSearch={handleSearch} />
-                  <Separator className="my-4" />
-                  <MapWithMarkers locations={locations} />
-                </CardContent>
-              </Card>
+          <TabsContent value="compare" className="space-y-2">
+            <div className="flex flex-wrap -mx-4">
+              <div className="w-full md:w-1/3 px-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Trip Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pl-2">
+                    <SearchForm onSearch={handleSearch} />
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="w-full md:w-1/3 px-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Results</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pl-2">
+                    <ResultsTable />
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="w-full md:w-1/3 px-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Map View</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pl-2">
+                    <MapWithMarkers locations={locations} />
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </TabsContent>
 

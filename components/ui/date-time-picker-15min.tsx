@@ -12,14 +12,21 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { TimePickerInput } from "./time-picker-input";
 import { Label } from "./label";
 import { TimePickerInput15Min } from "./time-picker-input-15min";
+import { FC, useRef } from "react";
 
-export function DateTimePicker15Min() {
-  const [date, setDate] = React.useState<Date>();
-  const minuteRef = React.useRef<HTMLInputElement>(null);
-  const hourRef = React.useRef<HTMLInputElement>(null);
+interface DateTimePicker15MinProps {
+  date: Date | undefined;
+  setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+}
+
+export const DateTimePicker15Min: FC<DateTimePicker15MinProps> = ({
+  date,
+  setDate,
+}) => {
+  const minuteRef = useRef<HTMLInputElement>(null);
+  const hourRef = useRef<HTMLInputElement>(null);
 
   return (
     <Popover>
@@ -50,7 +57,7 @@ export function DateTimePicker15Min() {
             <Label htmlFor="hours" className="text-xs">
               Hours
             </Label>
-            <TimePickerInput
+            <TimePickerInput15Min
               picker="hours"
               date={date}
               setDate={setDate}
@@ -76,4 +83,4 @@ export function DateTimePicker15Min() {
       </PopoverContent>
     </Popover>
   );
-}
+};
