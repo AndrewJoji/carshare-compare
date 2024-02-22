@@ -43,11 +43,10 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Reset validation messages
+
     setStartLocationError("");
     setEndLocationError("");
 
-    // Validate startLocation and endLocation
     let isValid = true;
     if (!startLocation) {
       setStartLocationError("Start location is required.");
@@ -58,7 +57,6 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
       isValid = false;
     }
 
-    // If validation fails, stop the form submission
     if (!isValid) return;
     try {
       const response = await fetch("/api/compareCost", {
@@ -69,11 +67,10 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
         body: JSON.stringify({
           startLocation,
           endLocation,
-          startDateTime: startDateTime?.toISOString(), // Convert Date to ISO string
+          startDateTime: startDateTime?.toISOString(), 
           endDateTime: endDateTime?.toISOString(),
           isEndEvoTripChecked,
           isEVModoChecked,
-          // Add any other form fields here
         }),
       });
 
@@ -82,7 +79,7 @@ const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
       }
 
       const data = await response.json();
-      console.log(data.message); // Or handle the response as needed
+      console.log(data.message); 
     } catch (error) {
       console.error("Failed to calculate cost:", error);
     }
